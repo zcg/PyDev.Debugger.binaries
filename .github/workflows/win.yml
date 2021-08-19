@@ -1,0 +1,29 @@
+name: win
+
+on:
+  workflow_dispatch
+      
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        name: [
+          "windows-py37",
+        ]
+        
+        include:
+          - name: "windows-py37"
+            python-version: "3.7"
+            os: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: git clone PyDev.Debugger
+      run: |
+        cd ..
+        git clone --depth 1 https://github.com/fabioz/PyDev.Debugger.git
+        
