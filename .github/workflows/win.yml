@@ -8,15 +8,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         name: [
-          "windows-py37",
+          "windows-py39",
         ]
         
         include:
-          - name: "windows-py37"
-            python-version: "3.7"
+          - name: "windows-py39"
+            python-version: "3.9"
             os: windows-latest
 
     steps:
@@ -34,3 +34,10 @@ jobs:
         cd PyDev.Debugger\pydevd_attach_to_process\windows
         compile_windows.bat
         
+    - uses: actions/upload-artifact@v2
+      with:
+        name: win_binaries
+        path: |
+          ../PyDev.Debugger/pydevd_attach_to_process/*.pdb
+          ../PyDev.Debugger/pydevd_attach_to_process/*.exe
+          ../PyDev.Debugger/pydevd_attach_to_process/*.dll
