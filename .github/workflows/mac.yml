@@ -1,4 +1,4 @@
-name: linux
+name: mac
 
 on:
   - push
@@ -18,7 +18,7 @@ jobs:
         include:
           - name: "linux-py39"
             python-version: "3.9"
-            os: ubuntu-18.04
+            os: macos-10.15
 
     steps:
     - uses: actions/checkout@v2
@@ -29,20 +29,17 @@ jobs:
         git clone --depth 1 https://github.com/fabioz/PyDev.Debugger.git
         
     - name: Compile attach to process on Windows
-      shell: bash
       run: |
         cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac
-        ./compile_linux.sh
+        ./compile_mac.sh
         
     - name: Copy files to upload
-      shell: bash
       run: |
-        cp ../PyDev.Debugger/pydevd_attach_to_process/*.so .
+        cp ../PyDev.Debugger/pydevd_attach_to_process/*.dylib .
         ls -la
-           
         
     - uses: actions/upload-artifact@v2
       with:
-        name: linux_binaries
+        name: mac_binaries
         path: |
-          *.so
+          *.dylib
