@@ -29,7 +29,7 @@ jobs:
         git clone --depth 1 https://github.com/fabioz/PyDev.Debugger.git
         
     - name: Compile attach to process on Windows
-      shell: cmd
+      shell: bash
       run: |
         cd ..
         cd PyDev.Debugger\pydevd_attach_to_process\linux_and_mac

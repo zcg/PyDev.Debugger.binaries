@@ -33,7 +33,10 @@ jobs:
       run: |
         cd ..\PyDev.Debugger\pydevd_attach_to_process\windows
         compile_windows.bat
-        cd ..\..\..\PyDev.Debugger.binaries
+        
+    - name: Copy files to upload
+      shell: cmd
+      run: |
         copy ..\PyDev.Debugger\pydevd_attach_to_process\windows\*.pdb .
         copy ..\PyDev.Debugger\pydevd_attach_to_process\windows\*.exe .
         copy ..\PyDev.Debugger\pydevd_attach_to_process\windows\*.dll .
