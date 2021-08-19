@@ -37,9 +37,10 @@ jobs:
     - name: Copy files to upload
       shell: cmd
       run: |
-        copy ..\PyDev.Debugger\pydevd_attach_to_process\windows\*.pdb .
-        copy ..\PyDev.Debugger\pydevd_attach_to_process\windows\*.exe .
-        copy ..\PyDev.Debugger\pydevd_attach_to_process\windows\*.dll .
+        copy ..\PyDev.Debugger\pydevd_attach_to_process\*.pdb .
+        copy ..\PyDev.Debugger\pydevd_attach_to_process\*.exe .
+        copy ..\PyDev.Debugger\pydevd_attach_to_process\*.dll .
+        dir
                 
     - uses: actions/upload-artifact@v2
       with:

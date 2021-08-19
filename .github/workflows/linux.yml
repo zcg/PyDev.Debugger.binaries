@@ -31,12 +31,18 @@ jobs:
     - name: Compile attach to process on Windows
       shell: bash
       run: |
-        cd ..
-        cd PyDev.Debugger\pydevd_attach_to_process\linux_and_mac
+        cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac
         compile_linux.sh
         
-#     - uses: actions/upload-artifact@v2
-#       with:
-#         name: linux_binaries
-#         path: |
-#           ../PyDev.Debugger/pydevd_attach_to_process/*.so
+    - name: Copy files to upload
+      shell: bash
+      run: |
+        cp ../PyDev.Debugger/pydevd_attach_to_process/*.so .
+        ls -la
+           
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: linux_binaries
+        path: |
+          *.so
