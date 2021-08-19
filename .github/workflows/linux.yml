@@ -1,0 +1,41 @@
+name: lunux
+
+on:
+  workflow_dispatch
+      
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: true
+      matrix:
+        name: [
+          "linux-py39",
+        ]
+        
+        include:
+          - name: "linux-py39"
+            python-version: "3.9"
+            os: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: git clone PyDev.Debugger
+      run: |
+        cd ..
+        git clone --depth 1 https://github.com/fabioz/PyDev.Debugger.git
+        
+    - name: Compile attach to process on Windows
+      shell: cmd
+      run: |
+        cd ..
+        cd PyDev.Debugger\pydevd_attach_to_process\linux_and_mac
+        compile_linux.sh
+        
+    - uses: actions/upload-artifact@v2
+      with:
+        name: linux_binaries
+        path: |
+          ../PyDev.Debugger/pydevd_attach_to_process/*.so
