@@ -1,7 +1,8 @@
 name: lunux
 
 on:
-  workflow_dispatch
+  - push
+  - workflow_dispatch
       
 jobs:
   build:
@@ -34,8 +35,8 @@ jobs:
         cd PyDev.Debugger\pydevd_attach_to_process\linux_and_mac
         compile_linux.sh
         
-    - uses: actions/upload-artifact@v2
-      with:
-        name: linux_binaries
-        path: |
-          ../PyDev.Debugger/pydevd_attach_to_process/*.so
+#     - uses: actions/upload-artifact@v2
+#       with:
+#         name: linux_binaries
+#         path: |
+#           ../PyDev.Debugger/pydevd_attach_to_process/*.so

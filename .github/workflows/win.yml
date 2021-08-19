@@ -1,7 +1,8 @@
 name: win
 
 on:
-  workflow_dispatch
+  - push
+  - workflow_dispatch
       
 jobs:
   build:
@@ -30,14 +31,18 @@ jobs:
     - name: Compile attach to process on Windows
       shell: cmd
       run: |
-        cd ..
-        cd PyDev.Debugger\pydevd_attach_to_process\windows
+        cd ..\PyDev.Debugger\pydevd_attach_to_process\windows
         compile_windows.bat
-        
+        cd ..\..\..\PyDev.Debugger.binaries
+        copy ..\PyDev.Debugger\pydevd_attach_to_process\windows\*.pdb .
+        copy ..\PyDev.Debugger\pydevd_attach_to_process\windows\*.exe .
+        copy ..\PyDev.Debugger\pydevd_attach_to_process\windows\*.dll .
+                
     - uses: actions/upload-artifact@v2
       with:
         name: win_binaries
+        if-no-files-found: error
         path: |
-          ../PyDev.Debugger/pydevd_attach_to_process/*.pdb
-          ../PyDev.Debugger/pydevd_attach_to_process/*.exe
-          ../PyDev.Debugger/pydevd_attach_to_process/*.dll
+          *.pdb
+          *.exe
+          *.dll
