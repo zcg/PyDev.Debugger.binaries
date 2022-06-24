@@ -26,7 +26,8 @@ jobs:
     - name: git clone PyDev.Debugger
       run: |
         cd ..
-        git clone --depth 1 https://github.com/fabioz/PyDev.Debugger.git
+        git clone https://github.com/fabioz/PyDev.Debugger.git
+        git checkout py311_939
         
     - name: Compile attach to process on Windows
       shell: bash
