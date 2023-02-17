@@ -30,7 +30,7 @@ jobs:
 #         cd PyDev.Debugger
 #         git checkout py311_939
         
-    - name: Compile attach to process on Windows
+    - name: Compile attach to process on Linux
       shell: bash
       run: |
         cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac

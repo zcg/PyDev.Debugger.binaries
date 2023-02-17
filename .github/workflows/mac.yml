@@ -12,11 +12,11 @@ jobs:
       fail-fast: true
       matrix:
         name: [
-          "linux-py39",
+          "mac-py39",
         ]
         
         include:
-          - name: "linux-py39"
+          - name: "mac-py39"
             python-version: "3.9"
             os: macos-10.15
 
@@ -30,7 +30,7 @@ jobs:
 #         cd PyDev.Debugger
 #         git checkout py311_939
         
-    - name: Compile attach to process on Windows
+    - name: Compile attach to process on macOS
       run: |
         cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac
         ./compile_mac.sh
