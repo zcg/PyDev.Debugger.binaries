@@ -19,11 +19,6 @@ jobs:
           - name: "mac-py39"
             python-version: "3.9"
             os: macos-10.15
-            arch: x86-64
-          - name: "mac-py39"
-            python-version: "3.9"
-            os: macos-latest
-            arch: arm64
 
     steps:
     - uses: actions/checkout@v2
@@ -35,18 +30,11 @@ jobs:
 #         cd PyDev.Debugger
 #         git checkout py311_939
         
-    - name: Compile attach to process on macOS x86-64
-      if: matrix.arch == x86-64
+    - name: Compile attach to process on macOS
       run: |
         cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac
         ./compile_mac.sh
         
-    - name: Compile attach to process on macOS arm64
-      if: matrix.arch == arm64
-      run: |
-        cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac
-        ./compile_mac_arm64.sh
-
     - name: Copy files to upload
       run: |
         cp ../PyDev.Debugger/pydevd_attach_to_process/*.dylib .
@@ -54,6 +42,6 @@ jobs:
         
     - uses: actions/upload-artifact@v2
       with:
-        name: mac_binaries_${{ matrix.arch }}
+        name: mac_binaries
         path: |
           *.dylib
