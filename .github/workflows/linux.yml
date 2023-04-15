@@ -19,6 +19,11 @@ jobs:
           - name: "linux-py39"
             python-version: "3.9"
             os: ubuntu-18.04
+            arch: x86-64
+          - name: "linux-py39"
+            python-version: "3.9"
+            os: ubuntu-18.04
+            arch: arm64
 
     steps:
     - uses: actions/checkout@v2
@@ -30,12 +35,20 @@ jobs:
 #         cd PyDev.Debugger
 #         git checkout py311_939
         
-    - name: Compile attach to process on Linux
+    - name: Compile attach to process on Linux x86-64
       shell: bash
+      if: matrix.arch == x86-64
       run: |
         cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac
         ./compile_linux.sh
         
+    - name: Compile attach to process on Linux arm64
+      shell: bash
+      if: matrix.arch == arm64
+      run: |
+        cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac
+        ./compile_linux_arm64.sh
+
     - name: Copy files to upload
       shell: bash
       run: |
@@ -45,6 +58,6 @@ jobs:
         
     - uses: actions/upload-artifact@v2
       with:
-        name: linux_binaries
+        name: linux_binaries_${{ matrix.arch }}
         path: |
           *.so

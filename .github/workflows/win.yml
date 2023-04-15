@@ -19,6 +19,11 @@ jobs:
           - name: "windows-py39"
             python-version: "3.9"
             os: windows-latest
+            arch: x86-64
+          - name: "windows-py39"
+            python-version: "3.9"
+            os: windows-latest
+            arch: arm64
 
     steps:
     - uses: actions/checkout@v2
@@ -30,12 +35,20 @@ jobs:
 #         cd PyDev.Debugger
 #         git checkout py311_939
         
-    - name: Compile attach to process on Windows
+    - name: Compile attach to process on Windows x86-64
       shell: cmd
+      if: matrix.arch == x86-64
       run: |
         cd ..\PyDev.Debugger\pydevd_attach_to_process\windows
         compile_windows.bat
         
+    - name: Compile attach to process on Windows arm64
+      shell: cmd
+      if: matrix.arch == arm64
+      run: |
+        cd ..\PyDev.Debugger\pydevd_attach_to_process\windows
+        compile_windows_arm64.bat
+
     - name: Copy files to upload
       shell: cmd
       run: |
@@ -46,7 +59,7 @@ jobs:
                 
     - uses: actions/upload-artifact@v2
       with:
-        name: win_binaries
+        name: win_binaries_${{ matrix.arch }}
         if-no-files-found: error
         path: |
           *.pdb
