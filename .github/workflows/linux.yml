@@ -18,7 +18,7 @@ jobs:
         include:
           - name: "linux-py39"
             python-version: "3.9"
-            os: ubuntu-18.04
+            os: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
