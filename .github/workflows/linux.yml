@@ -37,14 +37,14 @@ jobs:
         
     - name: Compile attach to process on Linux x86-64
       shell: bash
-      if: ${{ matrix.arch }} == "x86-64"
+      if: matrix.arch == x86-64
       run: |
         cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac
         ./compile_linux.sh
         
     - name: Compile attach to process on Linux arm64
       shell: bash
-      if: ${{ matrix.arch }} == "arm64"
+      if: matrix.arch == arm64
       run: |
         cd ../PyDev.Debugger/pydevd_attach_to_process/linux_and_mac
         ./compile_linux_arm64.sh

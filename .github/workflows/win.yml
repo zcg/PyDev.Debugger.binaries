@@ -37,14 +37,14 @@ jobs:
         
     - name: Compile attach to process on Windows x86-64
       shell: cmd
-      if: ${{ matrix.arch }} == "x86-64"
+      if: matrix.arch == x86-64
       run: |
         cd ..\PyDev.Debugger\pydevd_attach_to_process\windows
         compile_windows.bat
         
     - name: Compile attach to process on Windows arm64
       shell: cmd
-      if: ${{ matrix.arch }} == "arm64"
+      if: matrix.arch == arm64
       run: |
         cd ..\PyDev.Debugger\pydevd_attach_to_process\windows
         compile_windows_arm64.bat
