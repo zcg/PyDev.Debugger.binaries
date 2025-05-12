@@ -21,8 +21,6 @@ jobs:
             os: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-    
     - name: git clone PyDev.Debugger
       run: |
         cd ..
