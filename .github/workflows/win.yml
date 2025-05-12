@@ -42,7 +42,7 @@ jobs:
         copy ..\PyDev.Debugger\pydevd_attach_to_process\*.dll .
         dir
                 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: win_binaries
         if-no-files-found: error
